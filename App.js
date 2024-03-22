@@ -7,21 +7,28 @@ import {
   ImageBackground,
   SafeAreaView,
   Image,
+  TouchableOpacity,
 } from "react-native";
 import {
   useFonts,
   Inter_400Regular,
   Inter_700Bold,
+  Inter_300Light,
 } from "@expo-google-fonts/inter";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
     "Inter-Regular": Inter_400Regular,
     "Inter-Bold": Inter_700Bold,
+    "Inter-Light": Inter_300Light,
   });
 
   if (!fontsLoaded) {
     return <ActivityIndicator size="large" color="#00ff00" />;
+  }
+
+  const onPressFunctionButton = () => {
+    alert('Clicked...!');
   }
 
   return (
@@ -54,6 +61,32 @@ export default function App() {
               <Image source={require('./assets/sunny.png')}/>
               <Text style={{fontFamily: 'Inter-Regular', color: "#fff", marginLeft: 16}}>GOOD MORNING</Text>
             </View>
+
+            <View style={{marginTop: 16}}>
+              <Text>
+                <Text style={styles.clockTimeStyle}>
+                  11:37
+                </Text>
+                <Text style={styles.clockTimeFormatStyle}>
+                  BST
+                </Text>
+              </Text>
+            </View>
+
+            <View style={{marginTop: 16}}>
+              <Text style={styles.clockTimeZoneStyle}>
+              IN LONDON, UK
+              </Text>
+            </View>
+
+            <TouchableOpacity
+            onPress={onPressFunctionButton}
+            style={styles.buttonStyle}
+            >
+              <Text style={styles.buttonTextStyle}>MORE</Text>
+              <Image source={require("./assets/more-icon-encrypt.png")}/>
+            </TouchableOpacity>
+
           </View>
         </View>
       </ImageBackground>
@@ -89,4 +122,39 @@ const styles = StyleSheet.create({
     color: "#fff",
     marginTop: 8,
   },
+  clockTimeStyle: {
+    color: "#fff",
+    fontSize: 100,
+    fontFamily: "Inter-Bold",
+  },
+  clockTimeFormatStyle: {
+    color: "#fff",
+    fontSize: 15,
+    fontFamily: "Inter-Light",
+  },
+  clockTimeZoneStyle:{
+    color: "#fff",
+    fontSize: 15,
+    fontFamily: "Inter-Bold",
+    letterSpacing: 3,
+  },
+  buttonStyle: {
+    backgroundColor: "#fff",
+    height: 39,
+    width: 115,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 48,
+    borderRadius: 30,
+    paddingLeft: 16,
+    paddingRight: 4,
+  },
+  buttonTextStyle: {
+    fontFamily: "Inter-Bold",
+    fontSize: 12,
+    color: '#000',
+    letterSpacing: 3
+  }
+
 });
